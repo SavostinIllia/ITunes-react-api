@@ -11,7 +11,7 @@ const Pagination = ({ songsPerPage, totalSongs, paginate }) => {
       <ul>
         {pageNumbers.map((number) => {
           return (
-            <li>
+            <li key={Math.random() * 10}>
               <a onClick={() => paginate(number)} href="#">
                 {number}
               </a>

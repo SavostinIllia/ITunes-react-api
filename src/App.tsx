@@ -7,14 +7,35 @@ import Pagination from "./components/Pagination";
 import styled from "styled-components";
 import Header from "./components/Header";
 
+export interface IArtists {
+  trackName: string;
+  artworkUrl100: string;
+  artistName: string;
+  collectionName: string;
+  previewUrl: string;
+}
+
+const AppWrapper = styled.section`
+  background: linear-gradient(135deg, #ff6932 20%, #d600fc 50%, #3cf2fc 80%);
+  min-height: 100vh;
+  height: 100%;
+`;
+const ArtsitsWrapper = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1340px;
+  margin-left: 40px;
+  margin: 0 auto;
+  justify-content: center;
+`;
+
 const App: React.FC = () => {
-  const [items, setItems] = useState(() => {
-    return [];
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [artist, setItems] = useState<IArtists[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [songsPerPage] = useState<number>(10);
+  const [songsPerPage] = useState<number>(9);
   const [query, setQuery] = useState<string>("");
 
   useEffect(() => {
@@ -24,7 +45,7 @@ const App: React.FC = () => {
       }
       setIsLoading(true);
       const result = await axios(
-        `https://itunes.apple.com/search?term=${query}&limit=200`
+        `https://itunes.apple.com/search?term=${query}&limit=200&media=music`
       );
       const fetchedItems = result.data.results;
       if (fetchedItems.length === 0) {
@@ -39,19 +60,14 @@ const App: React.FC = () => {
     };
     fetchItems();
   }, [query]);
+
   const indexOfLastSong = currentPage * songsPerPage;
   const indexOfFirstSong = indexOfLastSong - songsPerPage;
-  const currentSongs = items.slice(indexOfFirstSong, indexOfLastSong);
+  const currentSongs = artist.slice(indexOfFirstSong, indexOfLastSong);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-
-  const AppWrapper = styled.section`
-    background: linear-gradient(135deg, #ff6932 20%, #d600fc 50%, #3cf2fc 80%);
-    min-height: 100vh;
-    height: 100%;
-  `;
 
   return (
     <AppWrapper>
@@ -61,14 +77,14 @@ const App: React.FC = () => {
       {isLoading ? (
         <h1>Loading</h1>
       ) : (
-        <>
-          <Items items={currentSongs} isLoading={isLoading} />
+        <ArtsitsWrapper>
+          <Items items={currentSongs} />
           <Pagination
             songsPerPage={songsPerPage}
-            totalSongs={items.length}
+            totalSongs={artist.length}
             paginate={paginate}
           />
-        </>
+        </ArtsitsWrapper>
       )}
     </AppWrapper>
   );

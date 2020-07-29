@@ -15,7 +15,7 @@ const HeaderSection = styled.section`
 `;
 
 const HeaderLogo = styled.img`
-  width: 200px;
+  width: 100px;
 `;
 const LogoTitle = styled.h1`
   font-size: 35px;
@@ -26,7 +26,10 @@ const LogoTitle = styled.h1`
 const Header: React.FC<HeaderProps> = () => {
   return (
     <HeaderSection>
-      <HeaderLogo src={logo}></HeaderLogo>
+      <a href="/">
+        <HeaderLogo src={logo}></HeaderLogo>
+      </a>
+
       <LogoTitle> ITunes Search API</LogoTitle>
     </HeaderSection>
   );
