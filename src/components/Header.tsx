@@ -29,7 +29,6 @@ const Header: React.FC<HeaderProps> = () => {
       <a href="/">
         <HeaderLogo src={logo}></HeaderLogo>
       </a>
-
       <LogoTitle> ITunes Search API</LogoTitle>
     </HeaderSection>
   );

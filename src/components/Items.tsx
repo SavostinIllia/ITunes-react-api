@@ -15,13 +15,14 @@ const ArtistCard = styled.div`
   margin-left: 40px;
   border-radius: 5px;
   padding: 20px;
-  min-height: 390px;
+  min-height: 500px;
   position: relative;
 `;
 
 const ArtsitImg = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 `;
 
 const ArtistDescription = styled.p`
@@ -29,6 +30,7 @@ const ArtistDescription = styled.p`
   color: #fff;
   text-align: left;
 `;
+
 const ArtistPreviewDemo = styled.video`
   width: 90%;
   height: 50px;
@@ -37,21 +39,61 @@ const ArtistPreviewDemo = styled.video`
   left: 50%;
   transform: translateX(-50%);
 `;
+
 const Items: React.FC<IArtistProps> = ({ items }) => {
+  const noRenderFullName = (title: string, type: string) => {
+    if (!title) {
+      return <ArtistDescription>{type}No Album Name</ArtistDescription>;
+    }
+    if (title.length >= 49) {
+      let slicedTitle: string = title.slice(0, 51);
+      let newsliced: Array<string> = new Array(slicedTitle);
+      newsliced.push("...");
+      slicedTitle = newsliced.join(" ");
+      return (
+        <ArtistDescription title={title}>
+          <strong>{type}</strong>
+          {slicedTitle}
+        </ArtistDescription>
+      );
+    } else {
+      return (
+        <ArtistDescription>
+          <strong> {type}</strong>
+
+          {title}
+        </ArtistDescription>
+      );
+    }
+  };
+
+  const thumbUrl = (url: string) => {
+    let slicedUrl: string = url.slice(0, -13);
+    let newUrl: Array<string> = new Array(slicedUrl);
+    newUrl.push("600x600bb.jpg");
+    slicedUrl = newUrl.join("");
+    return <ArtsitImg src={slicedUrl} />;
+  };
+
   return (
     <>
       {items.map((item, index) => {
-        console.log(item);
         return (
           <ArtistCard key={index}>
-            <ArtsitImg src={item.artworkUrl100} />
-            <ArtistDescription>{item.artistName}</ArtistDescription>
-            <ArtistDescription>{item.trackName}</ArtistDescription>
-            <ArtistDescription>{item.collectionName}</ArtistDescription>
+            {thumbUrl(item.artworkUrl100)}
+            <ArtistDescription>
+              <strong>Artist Name :</strong> {item.artistName}
+            </ArtistDescription>
+            {noRenderFullName(item.trackName, "Track Name : ")}
+            {noRenderFullName(item.collectionName, "Album Name : ")}
             <ArtistPreviewDemo
               controls
               src={item.previewUrl}
             ></ArtistPreviewDemo>
+            <ArtistDescription>
+              <strong>Music type : </strong>
+              {item.primaryGenreName}
+            </ArtistDescription>
           </ArtistCard>
         );
       })}

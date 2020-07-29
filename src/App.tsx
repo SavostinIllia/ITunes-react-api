@@ -6,6 +6,7 @@ import Items from "./components/Items";
 import Pagination from "./components/Pagination";
 import styled from "styled-components";
 import Header from "./components/Header";
+import Loader from "./components/Loader";
 
 export interface IArtists {
   trackName: string;
@@ -13,6 +14,7 @@ export interface IArtists {
   artistName: string;
   collectionName: string;
   previewUrl: string;
+  primaryGenreName: string;
 }
 
 const AppWrapper = styled.section`
@@ -75,9 +77,10 @@ const App: React.FC = () => {
       <SearchInput getQuery={(query: string) => setQuery(query)} />
       {showError ? <p>No Artsists here</p> : null}
       {isLoading ? (
-        <h1>Loading</h1>
+        <Loader />
       ) : (
         <ArtsitsWrapper>
+          {/* {artist.length ? <ArtistCard items={[artist[0]]} /> : null} */}
           <Items items={currentSongs} />
           <Pagination
             songsPerPage={songsPerPage}
