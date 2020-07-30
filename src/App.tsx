@@ -15,6 +15,8 @@ export interface IArtists {
   collectionName: string;
   previewUrl: string;
   primaryGenreName: string;
+  collectionViewUrl: string;
+  artistViewUrl: string;
 }
 
 const AppWrapper = styled.section`

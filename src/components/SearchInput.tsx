@@ -33,8 +33,15 @@ const SearchButton = styled.button`
   font-size: 18px;
   padding: 5px 10px;
   color: #fff;
+  transition: 0.3s ease-in-out;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
+    transition: 0.3s ease-in-out;
+  }
   &:active {
-    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 10px 10px 10px 0px rgba(55, 55, 55, 0.5);
   }
 `;
 

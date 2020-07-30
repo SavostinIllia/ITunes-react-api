@@ -15,14 +15,32 @@ const ArtistCard = styled.div`
   margin-left: 40px;
   border-radius: 5px;
   padding: 20px;
-  min-height: 500px;
+  min-height: 540px;
   position: relative;
+`;
+
+const ArtistLinkImg = styled.a`
+  display: inline-block;
+  position: relative;
+  min-height: 200px;
+  min-width: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    img {
+      transform: scale(1.2);
+    }
+  }
 `;
 
 const ArtsitImg = styled.img`
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  position: absolute;
+  left: 0;
+  transition: 0.3s ease-in-out;
 `;
 
 const ArtistDescription = styled.p`
@@ -38,6 +56,29 @@ const ArtistPreviewDemo = styled.video`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+`;
+
+const ArtistMoreButton = styled.a`
+  text-align: left;
+  display: block;
+  width: 160px;
+  margin-right: auto;
+  font-size: 18px;
+  color: #fff;
+  border: 1.5px solid #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 28px;
+  text-decoration: none;
+  position: absolute;
+  bottom: 90px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
 `;
 
 const Items: React.FC<IArtistProps> = ({ items }) => {
@@ -77,9 +118,12 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
   return (
     <>
       {items.map((item, index) => {
+        console.log(item);
         return (
           <ArtistCard key={index}>
-            {thumbUrl(item.artworkUrl100)}
+            <ArtistLinkImg href={item.collectionViewUrl} target="_blank">
+              {thumbUrl(item.artworkUrl100)}
+            </ArtistLinkImg>
             <ArtistDescription>
               <strong>Artist Name :</strong> {item.artistName}
             </ArtistDescription>
@@ -93,6 +137,9 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
               <strong>Music type : </strong>
               {item.primaryGenreName}
             </ArtistDescription>
+            <ArtistMoreButton href={item.artistViewUrl} target="_blank">
+              More about Artist
+            </ArtistMoreButton>
           </ArtistCard>
         );
       })}
