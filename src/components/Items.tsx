@@ -41,7 +41,7 @@ const ArtistPreviewDemo = styled.video`
 `;
 
 const Items: React.FC<IArtistProps> = ({ items }) => {
-  const noRenderFullName = (title: string, type: string) => {
+  const noRenderFullName = (title: string, type: string): JSX.Element => {
     if (!title) {
       return <ArtistDescription>{type}No Album Name</ArtistDescription>;
     }
@@ -60,14 +60,13 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
       return (
         <ArtistDescription>
           <strong> {type}</strong>
-
           {title}
         </ArtistDescription>
       );
     }
   };
 
-  const thumbUrl = (url: string) => {
+  const thumbUrl = (url: string): JSX.Element => {
     let slicedUrl: string = url.slice(0, -13);
     let newUrl: Array<string> = new Array(slicedUrl);
     newUrl.push("600x600bb.jpg");

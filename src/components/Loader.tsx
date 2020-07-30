@@ -31,7 +31,7 @@ const LoaderImg = styled.img`
   animation: ${logoSpin} 1s infinite;
 `;
 
-const Loader: React.FC<LoaderProps> = ({}) => {
+const Loader: React.FC<LoaderProps> = () => {
   return (
     <LoaderDiv>
       <LoaderImg src={logo} />

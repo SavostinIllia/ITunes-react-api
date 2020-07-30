@@ -74,13 +74,12 @@ const App: React.FC = () => {
   return (
     <AppWrapper>
       <Header />
-      <SearchInput getQuery={(query: string) => setQuery(query)} />
+      <SearchInput getQuery={(query) => setQuery(query)} />
       {showError ? <p>No Artsists here</p> : null}
       {isLoading ? (
         <Loader />
       ) : (
         <ArtsitsWrapper>
-          {/* {artist.length ? <ArtistCard items={[artist[0]]} /> : null} */}
           <Items items={currentSongs} />
           <Pagination
             songsPerPage={songsPerPage}
