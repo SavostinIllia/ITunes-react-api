@@ -9,6 +9,7 @@ const SearchForm = styled.form`
   display: flex;
   margin-top: 60px;
   justify-content: center;
+  font-family: "Montserrat";
   margin-bottom: 60px;
 `;
 
@@ -23,6 +24,7 @@ const SearchFormInput = styled.input`
   font-size: 18px;
   margin-right: 20px;
   font-weight: bold;
+  font-family: "Montserrat";
 `;
 
 const SearchButton = styled.button`
@@ -36,6 +38,7 @@ const SearchButton = styled.button`
   transition: 0.3s ease-in-out;
   font-weight: bold;
   cursor: pointer;
+  font-family: "Montserrat";
   &:hover {
     box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
     transition: 0.3s ease-in-out;

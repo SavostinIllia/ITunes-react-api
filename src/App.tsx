@@ -7,6 +7,7 @@ import Pagination from "./components/Pagination";
 import styled from "styled-components";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
+import ErrorText from "./components/ErrorText";
 
 export interface IArtists {
   trackName: string;
@@ -23,6 +24,7 @@ const AppWrapper = styled.section`
   background: linear-gradient(135deg, #ff6932 20%, #d600fc 50%, #3cf2fc 80%);
   min-height: 100vh;
   height: 100%;
+  font-family: "Montserrat";
 `;
 const ArtsitsWrapper = styled.section`
   display: flex;
@@ -39,7 +41,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [songsPerPage] = useState<number>(9);
+  const [songsPerPage] = useState<number>(6);
   const [query, setQuery] = useState<string>("");
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const App: React.FC = () => {
       }
       setIsLoading(true);
       const result = await axios(
-        `https://itunes.apple.com/search?term=${query}&limit=200&media=music`
+        `https://itunes.apple.com/search?term=${query}&limit=300&media=music`
       );
       const fetchedItems = result.data.results;
       if (fetchedItems.length === 0) {
@@ -61,6 +63,7 @@ const App: React.FC = () => {
       setItems(fetchedItems);
       setIsLoading(false);
       setShowError(false);
+      setCurrentPage(1);
     };
     fetchItems();
   }, [query]);
@@ -77,17 +80,18 @@ const App: React.FC = () => {
     <AppWrapper>
       <Header />
       <SearchInput getQuery={(query) => setQuery(query)} />
-      {showError ? <p>No Artsists here</p> : null}
+      {showError ? <ErrorText /> : null}
       {isLoading ? (
         <Loader />
       ) : (
         <ArtsitsWrapper>
-          <Items items={currentSongs} />
           <Pagination
             songsPerPage={songsPerPage}
             totalSongs={artist.length}
             paginate={paginate}
+            currentPage={currentPage}
           />
+          <Items items={currentSongs} />
         </ArtsitsWrapper>
       )}
     </AppWrapper>

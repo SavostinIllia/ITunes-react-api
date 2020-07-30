@@ -15,7 +15,7 @@ const ArtistCard = styled.div`
   margin-left: 40px;
   border-radius: 5px;
   padding: 20px;
-  min-height: 540px;
+  min-height: 560px;
   position: relative;
 `;
 
@@ -61,7 +61,7 @@ const ArtistPreviewDemo = styled.video`
 const ArtistMoreButton = styled.a`
   text-align: left;
   display: block;
-  width: 160px;
+  width: auto;
   margin-right: auto;
   font-size: 18px;
   color: #fff;
@@ -118,10 +118,9 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
   return (
     <>
       {items.map((item, index) => {
-        console.log(item);
         return (
           <ArtistCard key={index}>
-            <ArtistLinkImg href={item.collectionViewUrl} target="_blank">
+            <ArtistLinkImg href={item.artistViewUrl} target="_blank">
               {thumbUrl(item.artworkUrl100)}
             </ArtistLinkImg>
             <ArtistDescription>
@@ -137,8 +136,8 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
               <strong>Music type : </strong>
               {item.primaryGenreName}
             </ArtistDescription>
-            <ArtistMoreButton href={item.artistViewUrl} target="_blank">
-              More about Artist
+            <ArtistMoreButton href={item.collectionViewUrl} target="_blank">
+              More about Album
             </ArtistMoreButton>
           </ArtistCard>
         );
