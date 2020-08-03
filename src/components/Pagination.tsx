@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
+import PaginationLink from "./PaginationLink";
 interface PaginationProps {
   songsPerPage: number;
   totalSongs: number;
@@ -19,6 +19,7 @@ const PaginationUl = styled.ul`
   list-style: none;
   margin: 0 auto;
   text-align: center;
+  padding: 0;
 `;
 
 const PaginationLi = styled.li`
@@ -26,7 +27,7 @@ const PaginationLi = styled.li`
   list-style: none;
 `;
 
-const PaginationA = styled.a`
+const PaginationPage = styled.a`
   border: 1.5px solid #fff;
   border-radius: 5px;
   background: transparent;
@@ -37,11 +38,6 @@ const PaginationA = styled.a`
   display: block;
   font-size: 18px;
   font-weight: bold;
-  transition: 0.3s ease-in-out;
-  &:hover {
-    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.6);
-    transition: 0.3s ease-in-out;
-  }
 `;
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -50,49 +46,33 @@ const Pagination: React.FC<PaginationProps> = ({
   paginate,
   currentPage,
 }) => {
-  // const [linkClass, setLinkClass] = useState("primary");
   const pageNumbers: number[] = [];
+  const [paginationLinks, setPaginationLinks] = useState<number[]>([]);
+
+  const [activeElement, setActiveElement] = useState<Record<
+    number,
+    boolean
+  > | null>(null);
 
   for (let i = 1; i <= Math.ceil(totalSongs / songsPerPage); i++) {
     pageNumbers.push(i);
   }
 
-  const onClickHandle = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    id: number,
-    activeClass: boolean
-  ) => {
-    e.preventDefault();
-    activeClass = !activeClass;
-    console.log(id + 1, activeClass);
-  };
   return (
     <>
-      <PaginationNav>
-        <PaginationUl>
-          {pageNumbers.map((page: number, index: number) => {
-            const activeClass: boolean = false;
-            return (
-              <PaginationLi key={Math.random() * 10}>
-                <PaginationA
-                  onClick={(e) => {
-                    onClickHandle(e, index, activeClass);
-                    paginate(page);
-                  }}
-                  href="!#"
-                >
-                  {page}
-                </PaginationA>
-              </PaginationLi>
-            );
-          })}
-        </PaginationUl>
-        {pageNumbers.length === 0 ? null : (
+      {pageNumbers && pageNumbers.length > 0 ? (
+        <PaginationNav>
+          <PaginationUl>
+            <PaginationLink
+              page={pageNumbers}
+              handleActiveElement={setActiveElement}
+            />
+          </PaginationUl>
           <span>
-            <strong>{currentPage}</strong> page of {pageNumbers.length} page(s)
+            {currentPage} from {pageNumbers.length}
           </span>
-        )}
-      </PaginationNav>
+        </PaginationNav>
+      ) : null}
     </>
   );
 };

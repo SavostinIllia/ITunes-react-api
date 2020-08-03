@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import ButtonComponent from "./ButtonComponent";
 interface ISearchIput {
   getQuery(q: string): void;
 }
@@ -27,37 +28,11 @@ const SearchFormInput = styled.input`
   font-family: "Montserrat";
 `;
 
-const SearchButton = styled.button`
-  background: transparent;
-  border-radius: 5px;
-  outline: none;
-  border: 1.5px solid #fff;
-  font-size: 18px;
-  padding: 5px 10px;
-  color: #fff;
-  transition: 0.3s ease-in-out;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: "Montserrat";
-  &:hover {
-    box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
-    transition: 0.3s ease-in-out;
-  }
-  &:active {
-    box-shadow: inset 10px 10px 10px 0px rgba(55, 55, 55, 0.5);
-  }
-`;
-
 const SearchInput: React.FC<ISearchIput> = ({ getQuery }) => {
   const [text, setText] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (!text) {
-      alert("Enter pls the name of artist");
-      setText("");
-      return;
-    }
     getQuery(text);
   };
 
@@ -69,9 +44,15 @@ const SearchInput: React.FC<ISearchIput> = ({ getQuery }) => {
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setText(e.target.value)
         }
-        autoFocus
+        autoFocus={true}
       />
-      <SearchButton type="submit">Search Artist</SearchButton>
+
+      <ButtonComponent
+        disabled={!text}
+        type="submit"
+        text="Fetch Artists"
+        target="_blank"
+      />
     </SearchForm>
   );
 };

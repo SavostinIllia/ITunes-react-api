@@ -1,9 +1,9 @@
 import React from "react";
-import { IArtists } from "../App";
 import styled from "styled-components";
+import ButtonComponent from "../components/ButtonComponent";
 
-interface IArtistProps {
-  items: IArtists[];
+interface IArtistItemProps {
+  items: IArtist[];
 }
 
 const ArtistCard = styled.div`
@@ -29,7 +29,7 @@ const ArtistLinkImg = styled.a`
   &:hover {
     cursor: pointer;
     img {
-      transform: scale(1.2);
+      transform: scale(0.95);
     }
   }
 `;
@@ -58,30 +58,12 @@ const ArtistPreviewDemo = styled.video`
   transform: translateX(-50%);
 `;
 
-const ArtistMoreButton = styled.a`
-  text-align: left;
-  display: block;
-  width: auto;
-  margin-right: auto;
-  font-size: 18px;
-  color: #fff;
-  border: 1.5px solid #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
-  margin-top: 28px;
-  text-decoration: none;
-  position: absolute;
-  bottom: 90px;
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
-  }
+const ArtistTitleBold = styled.strong`
+  font-weight: bold;
+  margin-right: 7px;
 `;
 
-const Items: React.FC<IArtistProps> = ({ items }) => {
+const ArtistItem: React.FC<IArtistItemProps> = ({ items }) => {
   const noRenderFullName = (title: string, type: string): JSX.Element => {
     if (!title) {
       return <ArtistDescription>{type}No Album Name</ArtistDescription>;
@@ -93,14 +75,14 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
       slicedTitle = newsliced.join(" ");
       return (
         <ArtistDescription title={title}>
-          <strong>{type}</strong>
+          <ArtistTitleBold>{type}</ArtistTitleBold>
           {slicedTitle}
         </ArtistDescription>
       );
     } else {
       return (
         <ArtistDescription>
-          <strong> {type}</strong>
+          <ArtistTitleBold> {type}</ArtistTitleBold>
           {title}
         </ArtistDescription>
       );
@@ -124,7 +106,7 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
               {thumbUrl(item.artworkUrl100)}
             </ArtistLinkImg>
             <ArtistDescription>
-              <strong>Artist Name :</strong> {item.artistName}
+              <ArtistTitleBold>Artist Name :</ArtistTitleBold> {item.artistName}
             </ArtistDescription>
             {noRenderFullName(item.trackName, "Track Name : ")}
             {noRenderFullName(item.collectionName, "Album Name : ")}
@@ -133,12 +115,15 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
               src={item.previewUrl}
             ></ArtistPreviewDemo>
             <ArtistDescription>
-              <strong>Music type : </strong>
+              <ArtistTitleBold>Music type : </ArtistTitleBold>
               {item.primaryGenreName}
             </ArtistDescription>
-            <ArtistMoreButton href={item.collectionViewUrl} target="_blank">
-              More about Album
-            </ArtistMoreButton>
+            <ButtonComponent
+              type="text"
+              href={item.collectionViewUrl}
+              target="_blank"
+              text="More about Album"
+            />
           </ArtistCard>
         );
       })}
@@ -146,4 +131,4 @@ const Items: React.FC<IArtistProps> = ({ items }) => {
   );
 };
 
-export default Items;
+export default ArtistItem;
