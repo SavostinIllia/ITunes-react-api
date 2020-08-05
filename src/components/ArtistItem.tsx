@@ -24,6 +24,7 @@ const ArtistCard = styled.div`
     flex: 0 0 40%;
     max-width: unset;
     min-height: 640px;
+    margin-right: 0;
   }
   @media (max-width: 700px) {
     min-height: 640px;

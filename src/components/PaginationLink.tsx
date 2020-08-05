@@ -88,9 +88,9 @@ const PaginationLink: React.FC<PaginationLinkProps> = ({ pages, paginate }) => {
     const allElementsExceptActive = renderPageLinks.filter(
       (element: PaginationLink) => element.id !== id
     );
-    const elementToChangeClass: any = renderPageLinks.find(
-      (item: PaginationLink) => item.id === id
-    );
+    const elementToChangeClass = renderPageLinks.find(
+      (item) => item.id === id
+    ) as PaginationLink;
     const newElement = setActiveElement(elementToChangeClass);
     const newArrayOfElements = [...allElementsExceptActive, newElement];
     const sortedNewArrayOfElement = newArrayOfElements.sort(

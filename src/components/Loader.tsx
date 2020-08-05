@@ -29,6 +29,10 @@ const LoaderImg = styled.img`
   height: 400px;
   transform-style: preserve-3d;
   animation: ${logoSpin} 1s infinite;
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 300px;
+  }
 `;
 
 const Loader: React.FC<LoaderProps> = () => {
