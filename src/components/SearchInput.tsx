@@ -31,6 +31,11 @@ const SearchFormInput = styled.input`
   margin-right: 20px;
   font-weight: bold;
   font-family: "Montserrat";
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: #fff;
+    opacity: 0.8;
+  }
   @media (max-width: 540px) {
     flex: 0 0 100%;
     max-width: 70%;
@@ -55,6 +60,7 @@ const SearchInput: React.FC<ISearchIput> = ({ getQuery }) => {
           setText(e.target.value)
         }
         autoFocus={true}
+        placeholder="Enter Artist Name..."
       />
 
       <ButtonComponent
