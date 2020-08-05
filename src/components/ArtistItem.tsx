@@ -70,7 +70,7 @@ const ArtistItem: React.FC<IArtistItemProps> = ({ items }) => {
     }
     if (title.length >= 49) {
       let slicedTitle: string = title.slice(0, 51);
-      let newsliced: Array<string> = new Array(slicedTitle);
+      const newsliced: Array<string> = new Array(slicedTitle);
       newsliced.push("...");
       slicedTitle = newsliced.join(" ");
       return (

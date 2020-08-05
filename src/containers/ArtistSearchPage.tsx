@@ -18,6 +18,7 @@ const HeaderSection = styled.section`
   align-items: center;
   padding-top: 80px;
 `;
+const HeaderLogoWrapper = styled.a``;
 const HeaderLogo = styled.img`
   width: 100px;
 `;
@@ -47,13 +48,12 @@ const ArtistSearchPage: React.FC<ArtistSearchPageProps> = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
+      const iTunesUrl: string = "https://itunes.apple.com/search?term=";
       if (!query) {
         return;
       }
       setIsLoading(true);
-      const result = await axios(
-        `https://itunes.apple.com/search?term=${query}&limit=86&media=music`
-      );
+      const result = await axios(`${iTunesUrl}${query}&limit=86&media=music`);
       const fetchedItems: IArtist[] = result.data.results;
 
       if (fetchedItems.length === 0) {
@@ -81,9 +81,9 @@ const ArtistSearchPage: React.FC<ArtistSearchPageProps> = () => {
   return (
     <>
       <HeaderSection>
-        <a href="/">
+        <HeaderLogoWrapper href="/">
           <HeaderLogo src={logo}></HeaderLogo>
-        </a>
+        </HeaderLogoWrapper>
         <LogoTitle> ITunes Search API</LogoTitle>
       </HeaderSection>
       <SearchInput

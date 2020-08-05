@@ -7,7 +7,7 @@ interface ButtonComponentProps {
   type: "submit" | "text";
   href?: string;
   disabled?: boolean;
-  target?: any;
+  target?: string;
 }
 
 const SearchSubmitButton = styled.button`
@@ -22,6 +22,7 @@ const SearchSubmitButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   font-family: "Montserrat";
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   &:hover {
     box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
     transition: 0.3s ease-in-out;
@@ -33,6 +34,7 @@ const SearchSubmitButton = styled.button`
     box-shadow: none;
     cursor: not-allowed;
     background: #ccc;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -51,6 +53,7 @@ const ArtistMoreButton = styled.a`
   position: absolute;
   bottom: 90px;
   transition: 0.3s ease-in-out;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 
   &:hover {
     box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);

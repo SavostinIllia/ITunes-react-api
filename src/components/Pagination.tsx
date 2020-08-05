@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import PaginationLink from "./PaginationLink";
 interface PaginationProps {
@@ -11,6 +11,15 @@ interface PaginationProps {
 const PaginationNav = styled.nav`
   flex: 0 0 100%;
   margin: 0 auto 50px;
+  text-align: center;
+`;
+
+const PaginationPagesInformation = styled.span`
+  display: inline-block;
+  margin-top: 30px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 const PaginationUl = styled.ul`
@@ -22,24 +31,6 @@ const PaginationUl = styled.ul`
   padding: 0;
 `;
 
-const PaginationLi = styled.li`
-  display: inline-block;
-  list-style: none;
-`;
-
-const PaginationPage = styled.a`
-  border: 1.5px solid #fff;
-  border-radius: 5px;
-  background: transparent;
-  text-decoration: none;
-  padding: 10px 15px;
-  margin: 5px;
-  color: #fff;
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-`;
-
 const Pagination: React.FC<PaginationProps> = ({
   songsPerPage,
   totalSongs,
@@ -47,12 +38,6 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
 }) => {
   const pageNumbers: number[] = [];
-  const [paginationLinks, setPaginationLinks] = useState<number[]>([]);
-
-  const [activeElement, setActiveElement] = useState<Record<
-    number,
-    boolean
-  > | null>(null);
 
   for (let i = 1; i <= Math.ceil(totalSongs / songsPerPage); i++) {
     pageNumbers.push(i);
@@ -63,14 +48,11 @@ const Pagination: React.FC<PaginationProps> = ({
       {pageNumbers && pageNumbers.length > 0 ? (
         <PaginationNav>
           <PaginationUl>
-            <PaginationLink
-              page={pageNumbers}
-              handleActiveElement={setActiveElement}
-            />
+            <PaginationLink pages={pageNumbers} paginate={paginate} />
           </PaginationUl>
-          <span>
+          <PaginationPagesInformation>
             {currentPage} from {pageNumbers.length}
-          </span>
+          </PaginationPagesInformation>
         </PaginationNav>
       ) : null}
     </>
