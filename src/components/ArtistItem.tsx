@@ -17,6 +17,12 @@ const ArtistCard = styled.div`
   padding: 20px;
   min-height: 560px;
   position: relative;
+  @media (max-width: 600px) {
+    min-height: 640px;
+    margin-left: 0px;
+    flex: 0 0 80%;
+    max-width: 500px;
+  }
 `;
 
 const ArtistLinkImg = styled.a`

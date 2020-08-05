@@ -23,6 +23,10 @@ const SearchSubmitButton = styled.button`
   cursor: pointer;
   font-family: "Montserrat";
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  @media (max-width: 600px) {
+    margin: 25px 0;
+    padding: 10px;
+  }
   &:hover {
     box-shadow: inset 5px 5px 5px rgba(55, 55, 55, 0.5);
     transition: 0.3s ease-in-out;

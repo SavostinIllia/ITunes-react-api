@@ -23,9 +23,14 @@ const HeaderLogo = styled.img`
   width: 100px;
 `;
 const LogoTitle = styled.h1`
+  text-align: unset;
   font-size: 35px;
   margin-left: 20px;
   color: #fff;
+  @media (max-width: 540px) {
+    text-align: center;
+    margin-left: 0px;
+  }
 `;
 const ArtistWrapper = styled.section`
   display: flex;

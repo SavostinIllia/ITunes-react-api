@@ -8,10 +8,15 @@ interface ISearchIput {
 const SearchForm = styled.form`
   width: 100%;
   display: flex;
-  margin-top: 60px;
+  margin: 60px 0;
   justify-content: center;
   font-family: "Montserrat";
-  margin-bottom: 60px;
+
+  flex-wrap: wrap;
+  @media (max-width: 540px) {
+    margin: 0;
+    align-items: baseline;
+  }
 `;
 
 const SearchFormInput = styled.input`
@@ -26,6 +31,11 @@ const SearchFormInput = styled.input`
   margin-right: 20px;
   font-weight: bold;
   font-family: "Montserrat";
+  @media (max-width: 540px) {
+    flex: 0 0 100%;
+    max-width: 70%;
+    margin-right: 0;
+  }
 `;
 
 const SearchInput: React.FC<ISearchIput> = ({ getQuery }) => {

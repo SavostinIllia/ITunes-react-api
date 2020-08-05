@@ -27,6 +27,8 @@ const PaginationLinkButton = styled.a`
   font-weight: bold;
   box-shadow: inset 8px 8px 8px rgba(255, 255, 255, 0.5);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin: 6px;
+
   &:hover {
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5);
   }
