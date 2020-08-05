@@ -7,21 +7,28 @@ interface IArtistItemProps {
 }
 
 const ArtistCard = styled.div`
-  flex-basis: calc(30% - 40px);
+  flex: 0 0 45%;
+  max-width: 350px;
   background: transparent;
   border: 1.6px solid #fff;
   margin-bottom: 30px;
   text-align: center;
-  margin-left: 40px;
   border-radius: 5px;
   padding: 20px;
   min-height: 560px;
   position: relative;
-  @media (max-width: 600px) {
+  @media (max-width: 1224px) {
+    margin-right: 20px;
+  }
+  @media (max-width: 900px) {
+    flex: 0 0 40%;
+    max-width: unset;
     min-height: 640px;
-    margin-left: 0px;
+  }
+  @media (max-width: 700px) {
+    min-height: 640px;
     flex: 0 0 80%;
-    max-width: 500px;
+    max-width: 400px;
   }
 `;
 

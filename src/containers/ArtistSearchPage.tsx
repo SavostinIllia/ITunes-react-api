@@ -36,11 +36,22 @@ const ArtistWrapper = styled.section`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 1340px;
-  margin-left: 40px;
+  max-width: 1240px;
   margin: 0 auto;
-  justify-content: center;
+  justify-content: space-between;
   font-family: "Montserrat";
+  @media (max-width: 1224px) {
+    max-width: 1100px;
+    justify-content: center;
+  }
+  @media (max-width: 900px) {
+    max-width: 650px;
+    justify-content: space-between;
+  }
+  @media (max-width: 700px) {
+    max-width: 590px;
+    justify-content: center;
+  }
 `;
 
 const ArtistSearchPage: React.FC<ArtistSearchPageProps> = () => {
